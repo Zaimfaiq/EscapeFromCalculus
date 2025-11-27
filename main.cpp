@@ -152,10 +152,17 @@ struct anomali{
     string anomaliSymbol;
 };
 
-//Inisialisasi posisi anomali
-void initiateAnomali(anomali &a, position route[], int routeSize, long long speed, string symbol){
-    a.routeSize = routeSize;
-    for (int i = 0; i < routeSize; i++) {
+int hitungRoute(position route[], int index, int size){
+    if (index == size) return 0;
+    return 1 + hitungRoute(route, index + 1, size);
+}
+
+void initiateAnomali(anomali &a, 
+    position route[], int routeSize, 
+    long long speed, string symbol){
+    a.routeSize = hitungRoute(route, 0, routeSize);
+
+    for (int i = 0; i < routeSize; i++){
         a.route[i] = route[i];
     }
 
